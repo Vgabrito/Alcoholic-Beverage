@@ -1,0 +1,75 @@
+# Encapsulation: Binding the data (variables) and methods (functions) that operate on the data into a single unit (class).
+
+class AlcoholicBeverage:
+    def __init__(self, name, type, alcohol_percentage):
+        self.name = name
+        self.type = type
+        self.alcohol_percentage = alcohol_percentage
+
+# Inheritance: A mechanism where a new class inherits properties and behaviors from an existing class.
+
+class Beer(AlcoholicBeverage):
+    def __init__(self, name, brand, alcohol_percentage):
+        super().__init__(name, "beer", alcohol_percentage)
+
+class Wine(AlcoholicBeverage):
+    def __init__(self, name, grape_type, alcohol_percentage):
+        super().__init__(name, "wine", alcohol_percentage)
+
+class Spirit(AlcoholicBeverage):
+    def __init__(self, name, base_ingredient, alcohol_percentage):
+        super().__init__(name, "spirit", alcohol_percentage)
+        self.base_ingredient = base_ingredient
+
+# Polymorphism: The ability to use a single interface for different data types or objects.
+
+class AlcoholConsumer:
+    def consume(self):
+        pass
+
+class SocialDrinker(AlcoholConsumer):
+    def consume(self, beverage):
+        return f"I'm enjoying this {beverage.name}!"
+
+class HeavyDrinker(AlcoholConsumer):
+    def consume(self, beverage):
+        return f"I can handle more {beverage.type}!"
+
+# Abstraction: Hiding the complex implementation details and showing only the necessary features of an object.
+
+class AlcoholEffect:
+    def effect(self):
+        pass
+
+class Hangover(AlcoholEffect):
+    def effect(self):
+        return "Feeling terrible with a hangover."
+
+class Euphoria(AlcoholEffect):
+    def effect(self):
+        return "Experiencing euphoria and relaxation."
+
+# Example usage:
+
+# Encapsulation
+beer = Beer("Stella Artois", "Pale Lager", 5)
+print("Beer:", beer.name)
+print("Type:", beer.type)
+print("Alcohol Percentage:", beer.alcohol_percentage)
+
+# Inheritance
+whiskey = Spirit("Johnnie Walker", "Whiskey", 40)
+print("Spirit:", whiskey.name)
+print("Base Ingredient:", whiskey.base_ingredient)
+print("Alcohol Percentage:", whiskey.alcohol_percentage)
+
+# Polymorphism
+drinkers = [SocialDrinker(), HeavyDrinker()]
+beer = Beer("Heineken", "Pale Lager", 5)
+for drinker in drinkers:
+    print(drinker.consume(beer))
+
+# Abstraction
+effects = [Hangover(), Euphoria()]
+for effect in effects:
+    print("Effect:", effect.effect())
